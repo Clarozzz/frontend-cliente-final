@@ -1,0 +1,46 @@
+body {
+    background-color: #FFAF54;
+    font-family: rubik;
+}
+
+nav {
+    background-color: #DE8549;
+    color: white;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+#separador {
+    border: 7px solid white;
+    opacity: 100;
+}
+
+.btn-grande {
+    border: 0;
+    border-radius: 15px;
+    width: 300px;
+    height: 65px;
+    font-size: 25px;
+}
+
+.color-principal-fondo {
+    background-color: #FFAF54!important;
+}
+
+.color-secundario-fondo {
+    background-color: #DE5849!important;
+}
+
+.color-texto-blanco {
+    color: white;
+}
+
+.texto-grande {
+    font-size: 45px;
+    font-weight: 900;
+}
+
+.texto-pequeno {
+    font-size: 20px;
+    font-weight: 100;
+}
