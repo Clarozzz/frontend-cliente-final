@@ -59,21 +59,46 @@
     </main>
 
     <main id="apartado-inicio-sesion" style="display: none;">
-        <i role="button" class="fa-solid fa-xmark fs-1 mt-4 ms-4"></i>
+        <i role="button" class="fa-solid fa-xmark fs-1 mt-4 ms-4" onclick="volverPaginaInicio()"></i>
         <h1 class="text-center texto-grande mt-5">Iniciar sesion</h1>
 
         <form action="" class="px-5 mt-4">
             <label for="usuario" class="form-label texto-pequeno">Usuario:</label>
-            <input type="text" id="usuario" class="form-control form-control-lg color-inputs">
+            <input type="text" id="usuario" class="form-control form-control-lg color-inputs" value="usuario1" disabled>
             <label for="contrasena" class="form-label texto-pequeno mt-3">Contrasena:</label>
-            <input type="password" id="contrasena" class="form-control form-control-lg color-inputs mb-3">
+            <input type="password" id="contrasena" class="form-control form-control-lg color-inputs mb-3" value="1234" disabled>
             <div class="text-center">
-                <input type="submit" class="btn-grande color-secundario-fondo color-texto-blanco mt-4" value="Iniciar sesion">
+                <input type="button" class="btn-grande color-secundario-fondo color-texto-blanco mt-4" value="Iniciar sesion" onclick="abrirClientes()">
             </div>   
         </form>
 
-        <p class="text-center fs-5 px-5 mt-5">¿No tienes una cuenta? <span role="button" class="color-secundario-texto">Registrate</span></p>
+        <p class="text-center fs-5 px-5 mt-5">¿No tienes una cuenta? <span role="button" class="color-secundario-texto" onclick="abrirRegistro()">Registrate</span></p>
 
+    </main>
+
+    <main id="apartado-registro" style="display: none;">
+        <i role="button" class="fa-solid fa-xmark fs-1 mt-4 ms-4" onclick="volverPaginaInicio()"></i>
+        <h1 class="text-center texto-grande mt-5">Registrarse</h1>
+
+        <form action="" class="px-5 mt-4">
+            <label for="nombreRegistro" class="form-label texto-pequeno">Nombre:</label>
+            <input type="text" id="nombreRegistro" class="form-control form-control-lg color-inputs" value="fulano" disabled>
+
+            <label for="apellidoRegistro" class="form-label texto-pequeno mt-3">Apellido:</label>
+            <input type="text" id="apellidoRegistro" class="form-control form-control-lg color-inputs" value="fulanito" disabled>
+            
+            <label for="usuarioRegistro" class="form-label texto-pequeno mt-3">Usuario:</label>
+            <input type="text" id="usuarioRegistro" class="form-control form-control-lg color-inputs" value="usuario1" disabled>
+
+            <label for="contrasenaRegistro" class="form-label texto-pequeno mt-3">Contrasena:</label>
+            <input type="password" id="contrasenaRegistro" class="form-control form-control-lg color-inputs mb-3" value="1234" disabled>
+
+            <div class="text-center">
+                <input type="button" class="btn-grande color-secundario-fondo color-texto-blanco mt-4" value="Registrarse" onclick="location.reload()">
+            </div>   
+        </form>
+
+        <p class="text-center fs-5 px-5 mt-5">¿Ya tienes una cuenta?<br> <span role="button" class="color-secundario-texto" onclick="inicioSesion()">Iniciar sesion</span></p>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
