@@ -10,7 +10,11 @@ nav {
     border-bottom-left-radius: 15px;
 }
 
-#separador {
+.color-inputs {
+    background-color: #D9D9D9;
+}
+
+.separador {
     border: 7px solid white;
     opacity: 100;
 }
@@ -21,6 +25,10 @@ nav {
     width: 300px;
     height: 65px;
     font-size: 25px;
+}
+
+.color-secundario-texto {
+    color: #DE5849!important;
 }
 
 .color-principal-fondo {
@@ -40,7 +48,30 @@ nav {
     font-weight: 900;
 }
 
+.texto-mediano {
+    font-size: 25px;
+    font-weight: 600;
+}
+
 .texto-pequeno {
     font-size: 20px;
     font-weight: 100;
+}
+
+.contenedor-imagen {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.texto-en-imagen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.imagen {
+    display: block;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 }

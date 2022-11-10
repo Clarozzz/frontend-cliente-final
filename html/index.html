@@ -16,39 +16,70 @@
 
 <body>
 
-    <nav class="navbar">
+    <nav id="navbar-inicio" class="navbar sticky-top">
         <div class="container text-center">
-                <div class="col">
-                    <a href="#">
-                        <img src="../img/LogoCuadrado.png" alt="Logo" height="55" class="d-inline-block align-text-top">
-                    </a>
-                </div>
-                <div class="col-6">
-                    <h1 class="m-0">METEORO</h1>
-                </div>
-                <div class="col">
-                    <i class="fa-solid fa-bars fs-2"></i>
-                </div>
+            <div class="col">
+                <a href="#">
+                    <img src="../img/LogoCuadrado.png" alt="Logo" height="55" class="d-inline-block align-text-top">
+                </a>
+            </div>
+            <div class="col-6">
+                <h1 class="m-0">METEORO</h1>
+            </div>
+            <div class="col">
+                <i role="button" class="fa-solid fa-bars fs-2" onclick="inicioSesion()"></i>
+            </div>
         </div>
     </nav>
 
-    <main class="mt-5">
-            <h1 class="text-center texto-grande">Bienvenido a Meteoro</h1>
-            <p class="text-center texto-pequeno px-5 my-3">
-                Restaurantes, bebidas y mucho mas!
-            </p>
-            <div class="text-center mb-4">
-                <button class="btn-grande color-secundario-fondo color-texto-blanco">
-                    Iniciar sesión
-                </button>
-            </div>
-            
-            <hr id="separador">
+    <main id="pagina-inicio" class="mt-5">
+        <h1 class="text-center texto-grande">Bienvenido a Meteoro</h1>
+        <p class="text-center texto-pequeno px-5 my-3">
+            Restaurantes, bebidas y mucho mas!
+        </p>
+        <div class="text-center mb-4">
+            <button class="btn-grande color-secundario-fondo color-texto-blanco" onclick="inicioSesion()">
+                Iniciar sesión
+            </button>
+        </div>
+
+        <hr class="separador">
+
+        <h3 class="text-center texto-mediano mt-4">Los mejores restaurantes</h3>
+        <p class="text-center texto-pequeno px-5 my-3">Pide a domicilio de tus restaurantes favoritos</p>
+        <img class="mx-auto imagen" src="../img/restaurantes.jpg" alt="restaurantes" width="300">
+        <h3 class="text-center texto-mediano mt-4">Rapida entrega</h3>
+        <p class="text-center texto-pequeno px-5 my-3">ordena en linea y tendras tu pedido en minutos</p>
+        <img class="mx-auto imagen mb-4" src="../img/repartidor.jpg" alt="repartidor" width="200">
+
+        <hr class="separador">
+
+        <h3 class="text-center texto-mediano mt-4 px-5">Inicia sesion para comenzar</h3>
+        <img class="mx-auto imagen mb-4" src="../img/LogoCompleto.png" alt="logoMeteoro" width="300">
+    </main>
+
+    <main id="apartado-inicio-sesion" style="display: none;">
+        <i role="button" class="fa-solid fa-xmark fs-1 mt-4 ms-4"></i>
+        <h1 class="text-center texto-grande mt-5">Iniciar sesion</h1>
+
+        <form action="" class="px-5 mt-4">
+            <label for="usuario" class="form-label texto-pequeno">Usuario:</label>
+            <input type="text" id="usuario" class="form-control form-control-lg color-inputs">
+            <label for="contrasena" class="form-label texto-pequeno mt-3">Contrasena:</label>
+            <input type="password" id="contrasena" class="form-control form-control-lg color-inputs mb-3">
+            <div class="text-center">
+                <input type="submit" class="btn-grande color-secundario-fondo color-texto-blanco mt-4" value="Iniciar sesion">
+            </div>   
+        </form>
+
+        <p class="text-center fs-5 px-5 mt-5">¿No tienes una cuenta? <span role="button" class="color-secundario-texto">Registrate</span></p>
+
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous"></script>
+    <script src="../js/controladorLP.js"></script>
 </body>
 
 </html>
