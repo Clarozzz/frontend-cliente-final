@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,9 +13,50 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1bdf71b464.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    
-    Pagina de los clientes
+
+    <nav id="navbar-inicio" class="navbar sticky-top">
+        <div class="container text-center">
+            <div class="col">
+                <a href="#">
+                    <img src="../img/LogoCuadrado.png" alt="Logo" height="55" class="d-inline-block align-text-top">
+                </a>
+            </div>
+            <div class="col-6">
+                <h1 class="m-0">METEORO</h1>
+            </div>
+            <div class="col">
+                <i role="button" class="fa-solid fa-cart-shopping fs-2"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main id="paginaCategorias" class="mt-5">
+        <h1 class="text-center texto-grande">Elige una categoria</h1>
+
+        <div id="categorias" class="d-flex flex-column align-items-center">
+            
+        </div>
+    </main>
+
+    <main id="paginaEmpresas" class="mt-4" style="display: none;">
+        <i role="button" class="fa-solid fa-arrow-left ms-4 texto-mediano" onclick="regresarACategorias()"></i>
+        <h1 class="text-center texto-grande">Elige una empresa</h1>
+
+        <div id="empresas" class="d-flex flex-column align-items-center">
+
+        </div>
+    </main>
+
+    <main id="paginaProductos" class="mt-4" style="display: none;">
+        <i role="button" class="fa-solid fa-arrow-left ms-4 texto-mediano" onclick="regresarAEmpresas()"></i>
+        <h1 class="text-center texto-grande px-2">Elige un producto</h1>
+
+        <div id="productos" class="d-flex flex-column align-items-center">
+            
+        </div>
+    </main>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
@@ -22,4 +64,5 @@
         crossorigin="anonymous"></script>
     <script src="../js/controladorPCF.js"></script>
 </body>
+
 </html>

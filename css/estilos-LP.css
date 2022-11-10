@@ -58,18 +58,6 @@ nav {
     font-weight: 100;
 }
 
-.contenedor-imagen {
-    position: relative;
-    display: inline-block;
-    text-align: center;
-}
-
-.texto-en-imagen {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
-
 .imagen {
     display: block;
     border-top-right-radius: 20px;
