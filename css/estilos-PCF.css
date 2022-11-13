@@ -9,6 +9,24 @@ nav {
     border-bottom-left-radius: 15px;
 }
 
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFAF54;
+}
+
+input[type="number"] {
+    text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
 .tamano-opcion {
     width: 342px;
     height: 192px;
@@ -20,6 +38,29 @@ nav {
     width: 300px;
     height: 65px;
     font-size: 25px;
+}
+
+.btn-mediano {
+    border: 0;
+    border-radius: 10px;
+    width: 200px;
+    height: 45px;
+    font-size: 20px;
+}
+
+.btn-pequeno {
+    border: 0;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.borde-color-primario {
+    border-color: #FFAF54!important;
+}
+
+.borde-color-secundario {
+    border-color: #DE5849!important;
 }
 
 .color-secundario-texto {
