@@ -27,7 +27,6 @@ async function obtenerOrdenes() {
         }
     });
     ordenes = await result.json();
-    console.log(ordenes);
 }
 obtenerOrdenes()
 
@@ -180,6 +179,23 @@ async function ordenar() {
 
     for (let i = 0; i < cantidadOrdenar; i++) {
         usuarioActual.ordenes.push(productoSeleccionado);
+        const respuesta = await fetch('http://localhost:5005/ordenes', {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                idOrden: idOrden,
+                nombreCliente: usuarioActual.nombre,
+                nombreProducto: productoSeleccionado.nombreProducto,
+                descripcion: productoSeleccionado.descripcionProducto,
+                direccion: usuarioActual.direccion,
+                total: productoSeleccionado.precio,
+                estado: 'Disponible'
+            })
+        })
+        obtenerOrdenes();
+        idOrden += 1;
     }
 
     const result = await fetch(`http://localhost:5005/usuarios/${usuarioActual._id}`, {
@@ -198,26 +214,11 @@ async function ordenar() {
         })
     });
 
-    const respuesta = await fetch('http://localhost:5005/ordenes', {
-        method: 'post',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-            idOrden: idOrden,
-            nombreCliente: usuarioActual.nombre,
-            nombreProducto: productoSeleccionado.nombreProducto,
-            descripcion: productoSeleccionado.descripcionProducto,
-            direccion: usuarioActual.direccion,
-            total: productoSeleccionado.precio,
-            estado: ''
-        })
-    })
+
 
     const myModalEl = document.getElementById('modalOrdenar')
     const modal = bootstrap.Modal.getInstance(myModalEl);
     modal.hide();
-    obtenerOrdenes();
 }
 
 function cambiarValor(btn) {
@@ -235,13 +236,45 @@ function cambiarValor(btn) {
     }
 }
 
-function verCarrito() {
+async function verCarrito() {
     document.getElementById('paginaCategorias').style.display = 'none';
     document.getElementById('paginaProductos').style.display = 'none';
     document.getElementById('paginaEmpresas').style.display = 'none';
     document.getElementById('carrito').style.display = 'block';
-
     document.getElementById('iconoCarrito').style.display = 'none';
+
+    document.getElementById('comprasCarrito').innerHTML = '';
+
+    const result = await fetch(`http://localhost:5005/usuarios/${usuarioActual._id}`, {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json' }
+    });
+    usuarioActual = await result.json();
+    cargarOdenesCarrito();
+}
+
+function cargarOdenesCarrito() {
+    console.log(usuarioActual.ordenes)
+    let total = 0;
+    usuarioActual.ordenes.forEach(orden => {
+        document.getElementById('comprasCarrito').innerHTML +=
+            `
+        <div class="tamano-opcion mt-4 border rounded-4 p-3 borde-color-primario">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3 class="fs-4">${orden.nombreProducto}</h3>
+                        <p>${orden.descripcionProducto}</p>
+                    </div>
+                    <div style="width: 150px; height: 150px;">
+                        <img src="${orden.image}" alt="${orden.nombreProducto}" width="100%" height="100%">
+                    </div>
+                </div>
+            </div>
+        `
+        total += orden.precio;
+    })
+
+    document.getElementById('totalCompras').innerHTML = `Lps. ${total}`
 }
 
 function direccion() {
@@ -257,9 +290,74 @@ function regresarACarrito() {
     document.getElementById('carrito').style.display = 'block';
 }
 
+async function guardarDireccion() {
+    usuarioActual.direccion = document.getElementById('direccionUsuario').value;
+
+    const resUsuario = await fetch(`http://localhost:5005/usuarios/${usuarioActual._id}`, {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            nombre: usuarioActual.nombre,
+            apellido: usuarioActual.apellido,
+            usuario: usuarioActual.usuario,
+            contrasena: usuarioActual.contrasena,
+            direccion: usuarioActual.direccion,
+            metodoDePago: usuarioActual.metodoDePago,
+            ordenes: usuarioActual.ordenes
+        })
+    });
+
+    for (let i = 0; i < ordenes.length; i++) {
+        const resOrden = await fetch(`http://localhost:5005/ordenes/${ordenes[i]._id}`, {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                idOrden: ordenes[i].idOrden,
+                nombreCliente: ordenes[i].nombreCliente,
+                nombreProducto: ordenes[i].nombreProducto,
+                descripcion: ordenes[i].descripcion,
+                direccion: usuarioActual.direccion,
+                total: ordenes[i].total,
+                estado: 'Disponible'
+            })
+        })
+    }
+
+    metodoDePago();
+}
+
 function metodoDePago() {
     document.getElementById('direccion').style.display = 'none';
     document.getElementById('metodoDePago').style.display = 'block';
+
+
+}
+
+async function guardarInfoPago() {
+    let numTarjeta = document.getElementById('tarjeta').value;
+    let ccv = document.getElementById('ccv').value;
+    let caducidad = document.getElementById('caducidad').value;
+    let metodoDePago = {
+        numTarjeta: numTarjeta,
+        ccv: ccv,
+        caducidad: caducidad
+    }
+
+    const result = await fetch(`http://localhost:5005/usuarios/${usuarioActual._id}`, {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            nombre: usuarioActual.nombre,
+            apellido: usuarioActual.apellido,
+            usuario: usuarioActual.usuario,
+            contrasena: usuarioActual.contrasena,
+            direccion: usuarioActual.direccion,
+            metodoPago: metodoDePago,
+            ordenes: usuarioActual.ordenes
+        })
+    })
+
+    location.reload();
 }
 
 function regresarADireccion() {

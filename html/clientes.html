@@ -62,27 +62,17 @@
         <i role="button" class="fa-solid fa-arrow-left ms-4 texto-mediano" onclick="regresarACategorias()"></i>
         <h1 class="text-center texto-grande">Tus compras</h1>
 
-        <div class="d-flex flex-column align-items-center mb-4">
-            <div class="tamano-opcion mt-4 border rounded-4 p-3 borde-color-primario">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h3 class="fs-4">Pizza Suprema</h3>
-                        <p>Incluye refresco y ensalada</p>
-                    </div>
-                    <div style="width: 150px; height: 150px;">
-                        <img src="../img/pizzaSuprema.jpg" alt="pizza suprema" width="100%" height="100%">
-                    </div>
-                </div>
-            </div>
+        <div id="comprasCarrito" class="d-flex flex-column align-items-center mb-4">
+
         </div>
 
-        <footer>
-            <div class="d-flex justify-content-around mt-3">
-                <div class="texto-mediano">Total:</div>
-                <div class="texto-mediano">Lps. 199</div>
+        <footer class="color-principal-fondo sticky-bottom">
+            <div class="d-flex justify-content-around">
+                <div class="texto-mediano mt-3">Total:</div>
+                <div id="totalCompras" class="texto-mediano mt-3"></div>
             </div>
 
-            <div class="text-center my-3">
+            <div class="text-center mt-3" style="height: 70px!important;">
                 <button class="btn-mediano color-secundario-fondo color-texto-blanco" onclick="direccion()">
                     Finalizar compra
                 </button>
@@ -102,9 +92,13 @@
                 width="350" height="300" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
+        <div class="px-4 mt-3">
+            <label for="direccionUsuario" class="form-label texto-pequeno">Direccion:</label>
+            <input type="text" id="direccionUsuario" class="form-control form-control-lg color-inputs">
+        </div>
 
         <div class="text-center mt-4">
-            <button class="btn-grande color-secundario-fondo color-texto-blanco" onclick="metodoDePago()">
+            <button class="btn-grande color-secundario-fondo color-texto-blanco" onclick="guardarDireccion()">
                 Establecer direccion
             </button>
         </div>
@@ -116,19 +110,16 @@
 
         <form action="" class="m-4">
             <label for="tarjeta" class="form-label texto-pequeno">Numero de tarjeta:</label>
-            <input type="text" id="tarjeta" class="form-control form-control-lg color-inputs"
-                value="1234-5678-9000-0000" disabled>
+            <input type="text" id="tarjeta" class="form-control form-control-lg color-inputs">
 
             <div class="row">
                 <div class="col">
                     <label for="ccv" class="form-label texto-pequeno mt-3">CCV:</label>
-                    <input type="password" id="ccv" class="form-control form-control-lg color-inputs mb-3" value="1234"
-                        disabled>
+                    <input type="password" id="ccv" class="form-control form-control-lg color-inputs mb-3">
                 </div>
                 <div class="col">
                     <label for="caducidad" class="form-label texto-pequeno mt-3">Caducidad:</label>
-                    <input type="text" id="caducidad" class="form-control form-control-lg color-inputs mb-3"
-                        value="0101" disabled>
+                    <input type="text" id="caducidad" class="form-control form-control-lg color-inputs mb-3">
                 </div>
 
             </div>
@@ -136,7 +127,7 @@
 
             <div class="text-center">
                 <input type="button" class="btn-grande color-secundario-fondo color-texto-blanco mt-4" value="Finalizar"
-                    onclick="location.reload()">
+                    onclick="guardarInfoPago()">
             </div>
         </form>
     </main>
