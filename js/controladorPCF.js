@@ -62,42 +62,78 @@ var categorias = [
     }
 ];
 
+var empresasCategoriaSeleccionada = [];
+
 var seleccionCategoria;
 var seleccionEmpresa;
+
+async function obtenerCategorias() {
+    const result = await fetch('http://localhost:5005/categorias', {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    categorias = await result.json();
+}
+obtenerCategorias().then(() => {
+    generarCategorias();
+});
 
 function generarCategorias() {
     document.getElementById('categorias').innerHTML = '';
 
-    categorias.forEach((categoria, indice) => {
+    categorias.forEach((categoria) => {
         document.getElementById('categorias').innerHTML += 
         `
         <div class="tamano-opcion mt-4">
-            <img src="${categoria.icono}" alt="${categoria.nombre}" class="imagen shadow border border-2" onclick="categoriaSeleccionada(${indice})">
+            <img src="${categoria.icono}" alt="${categoria.nombre}" class="imagen shadow border border-2" onclick="categoriaSeleccionada('${categoria._id}')">
         </div>
         `
     })
 }
-generarCategorias();
 
-function categoriaSeleccionada(indice) {
+async function categoriaSeleccionada(idCategoria) {
     document.getElementById('paginaCategorias').style.display = 'none';
     document.getElementById('paginaProductos').style.display = 'none';
     document.getElementById('carrito').style.display = 'none';
     document.getElementById('paginaEmpresas').style.display = 'block';
 
-    console.log(indice)
-    seleccionCategoria = categorias[indice];
+    const result = await fetch(`http://localhost:5005/categorias/${idCategoria}`, {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    seleccionCategoria = await result.json();
+    obtenerEmpresas(seleccionCategoria.empresas);
+}
+
+async function obtenerEmpresas(empresas) {
+    empresasCategoriaSeleccionada = [];
+    for (let i = 0; i < empresas.length; i++) {
+        const result = await fetch(`http://localhost:5005/empresas/empresas-categoria/${empresas[i]}`, {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const resJSON = await result.json();
+        empresasCategoriaSeleccionada.push(resJSON);
+    }
     cargarEmpresas();
 }
 
 function cargarEmpresas() {
     document.getElementById('empresas').innerHTML = '';
 
-    seleccionCategoria.empresas.forEach((empresa, indice) => {
+    empresasCategoriaSeleccionada.forEach((empresa) => {
         document.getElementById('empresas').innerHTML += 
         `
         <div class="tamano-opcion mt-4">
-            <img src="${empresa.icono}" alt="${empresa.nombreEmpresa}" class="imagen shadow border border-2" onclick="empresaSeleccionada(${indice})">
+            <img src="${empresa.logo}" alt="${empresa.nombreEmpresa}" class="imagen shadow border border-2" onclick="empresaSeleccionada('${empresa._id}')">
         </div>
         `
     })

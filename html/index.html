@@ -64,9 +64,10 @@
 
         <form action="" class="px-5 mt-4">
             <label for="usuario" class="form-label texto-pequeno">Usuario:</label>
-            <input type="text" id="usuario" class="form-control form-control-lg color-inputs" value="usuario1" disabled>
+            <input type="text" id="usuario" class="form-control form-control-lg color-inputs">
             <label for="contrasena" class="form-label texto-pequeno mt-3">Contrasena:</label>
-            <input type="password" id="contrasena" class="form-control form-control-lg color-inputs mb-3" value="1234" disabled>
+            <input type="password" id="contrasena" class="form-control form-control-lg color-inputs mb-3">
+            <span class="color-rojo-texto" id="aviso"></span>
             <div class="text-center">
                 <input type="button" class="btn-grande color-secundario-fondo color-texto-blanco mt-4" value="Iniciar sesion" onclick="abrirClientes()">
             </div>   
@@ -82,19 +83,19 @@
 
         <form action="" class="px-5 mt-4">
             <label for="nombreRegistro" class="form-label texto-pequeno">Nombre:</label>
-            <input type="text" id="nombreRegistro" class="form-control form-control-lg color-inputs" value="fulano" disabled>
+            <input type="text" id="nombreRegistro" class="form-control form-control-lg color-inputs">
 
             <label for="apellidoRegistro" class="form-label texto-pequeno mt-3">Apellido:</label>
-            <input type="text" id="apellidoRegistro" class="form-control form-control-lg color-inputs" value="fulanito" disabled>
+            <input type="text" id="apellidoRegistro" class="form-control form-control-lg color-inputs">
             
             <label for="usuarioRegistro" class="form-label texto-pequeno mt-3">Usuario:</label>
-            <input type="text" id="usuarioRegistro" class="form-control form-control-lg color-inputs" value="usuario1" disabled>
+            <input type="text" id="usuarioRegistro" class="form-control form-control-lg color-inputs">
 
             <label for="contrasenaRegistro" class="form-label texto-pequeno mt-3">Contrasena:</label>
-            <input type="password" id="contrasenaRegistro" class="form-control form-control-lg color-inputs mb-3" value="1234" disabled>
+            <input type="password" id="contrasenaRegistro" class="form-control form-control-lg color-inputs mb-3">
 
             <div class="text-center">
-                <input type="button" class="btn-grande color-secundario-fondo color-texto-blanco mt-4" value="Registrarse" onclick="location.reload()">
+                <input type="button" class="btn-grande color-secundario-fondo color-texto-blanco mt-4" value="Registrarse" onclick="crearNuevoUsuario()">
             </div>   
         </form>
 
