@@ -40,6 +40,7 @@ async function abrirClientes() {
     
     if (usuario == usuarioBack.usuario && contrasena == usuarioBack.contrasena){
         usuarioActual = usuarioBack;
+        localStorage.setItem('usuario', JSON.stringify(usuarioActual));
         window.open('clientes.html', '_self');
     } else {
         document.getElementById('aviso').innerHTML = 'Usuario o contrasena incorrectos'
