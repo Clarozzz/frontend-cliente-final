@@ -5,6 +5,8 @@ var productoSeleccionado;
 var usuarioActual = JSON.parse(localStorage.getItem('usuario'));
 var ordenes;
 var seleccionEmpresa;
+var idscolecciones = '63939683519c89c6ecb99d75';
+var ids;
 
 async function obtenerCategorias() {
     const result = await fetch('http://localhost:5005/categorias', {
@@ -18,6 +20,17 @@ async function obtenerCategorias() {
 obtenerCategorias().then(() => {
     generarCategorias();
 });
+
+async function obtenerIdscolecciones() {
+    const result = await fetch(`http://localhost:5005/idscolecciones/${idscolecciones}`, {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    ids = await result.json();
+}
+obtenerIdscolecciones();
 
 async function obtenerOrdenes() {
     const result = await fetch('http://localhost:5005/ordenes', {
@@ -175,9 +188,10 @@ function modalOrdenar(indice) {
 
 async function ordenar() {
     let cantidadOrdenar = parseInt(document.getElementById('cantidadProducto').value);
-    let idOrden = (ordenes.length + 1);
+    let idOrden = ids.idOrdenes;
 
     for (let i = 0; i < cantidadOrdenar; i++) {
+        idOrden += 1;
         usuarioActual.ordenes.push(productoSeleccionado);
         const respuesta = await fetch('http://localhost:5005/ordenes', {
             method: 'post',
@@ -194,9 +208,24 @@ async function ordenar() {
                 estado: 'Disponible'
             })
         })
+
         obtenerOrdenes();
-        idOrden += 1;
     }
+
+    const resPut = await fetch(`http://localhost:5005/idscolecciones/${idscolecciones}`, {
+        method: 'put',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            idUsuario: ids.idUsuario,
+            idRepartidor: ids.idRepartidor,
+            idProducto: ids.idProducto,
+            idOrdenes: idOrden,
+            idEmpresas: ids.idEmpresas,
+            idAdministradores: ids.idAdministradores
+        })
+    });
 
     const result = await fetch(`http://localhost:5005/usuarios/${usuarioActual._id}`, {
         method: 'put',
@@ -204,6 +233,7 @@ async function ordenar() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            idUsuario: usuarioActual.idUsuario,
             nombre: usuarioActual.nombre,
             apellido: usuarioActual.apellido,
             usuario: usuarioActual.usuario,
@@ -213,8 +243,7 @@ async function ordenar() {
             ordenes: usuarioActual.ordenes
         })
     });
-
-
+    obtenerIdscolecciones();
 
     const myModalEl = document.getElementById('modalOrdenar')
     const modal = bootstrap.Modal.getInstance(myModalEl);
@@ -347,13 +376,14 @@ async function guardarInfoPago() {
         method: 'put',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+            idUsuario: usuarioActual.idUsuario,
             nombre: usuarioActual.nombre,
             apellido: usuarioActual.apellido,
             usuario: usuarioActual.usuario,
             contrasena: usuarioActual.contrasena,
             direccion: usuarioActual.direccion,
             metodoPago: metodoDePago,
-            ordenes: usuarioActual.ordenes
+            ordenes: usuarioActual.ordenes = []
         })
     })
 

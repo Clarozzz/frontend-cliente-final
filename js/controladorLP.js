@@ -1,4 +1,4 @@
-var idUsuario = 0;
+var idUsuario = '63939683519c89c6ecb99d75';
 var usuarioActual;
 
 function inicioSesion() {
@@ -37,8 +37,8 @@ async function abrirClientes() {
     });
 
     let usuarioBack = await result.json();
-    
-    if (usuario == usuarioBack.usuario && contrasena == usuarioBack.contrasena){
+
+    if (usuario == usuarioBack.usuario && contrasena == usuarioBack.contrasena) {
         usuarioActual = usuarioBack;
         localStorage.setItem('usuario', JSON.stringify(usuarioActual));
         window.open('clientes.html', '_self');
@@ -53,7 +53,14 @@ async function crearNuevoUsuario() {
     let apellido = document.getElementById('apellidoRegistro').value;
     let usuario = document.getElementById('usuarioRegistro').value;
     let contrasena = document.getElementById('contrasenaRegistro').value;
-    idUsuario += 1;
+
+    const result = await fetch(`http://localhost:5005/idscolecciones/${idUsuario}`, {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    let ids = await result.json();
 
     const respuesta = await fetch('http://localhost:5005/usuarios', {
         method: 'POST',
@@ -61,7 +68,7 @@ async function crearNuevoUsuario() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            idUsuario: idUsuario,
+            idUsuario: ids.idUsuario + 1,
             nombre: nombre,
             apellido: apellido,
             usuario: usuario,
@@ -71,8 +78,23 @@ async function crearNuevoUsuario() {
             ordenes: []
         })
     });
-
     const resJSON = await respuesta.json();
     console.log('Respuesta', resJSON);
+
+    const resPut = await fetch(`http://localhost:5005/idscolecciones/${idUsuario}`, {
+        method: 'put',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            idUsuario: ids.idUsuario + 1,
+            idRepartidor: ids.idRepartidor,
+            idProducto: ids.idProducto,
+            idOrdenes: ids.idOrdenes,
+            idEmpresas: ids.idEmpresas,
+            idAdministradores: ids.idAdministradores
+        })
+    });
+
     location.reload();
 }
